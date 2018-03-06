@@ -86,6 +86,20 @@ if (strpos('EDITED BY INSTALLER', $installFile) === false) {
     file_put_contents('recovery/install/src/app.php', $newContent);
 }
 
+// Now update the config
+$configWriterFile = file_get_contents('recovery/install/src/Service/ConfigWriter.php');
+if (strpos('EDITED BY INSTALLER', $configWriterFile) === false) {
+    // Add some code to initiate the session with the correct settings
+    $replacement = '
+            \'db\' => [],
+            // EDITED BY INSTALLER
+            \'trustedproxies\' => [\'0.0.0.0/0\']
+';
+    $placeholder = '\'db\' => [],';
+    $newContent = str_replace($placeholder, $replacement, $configWriterFile);
+    file_put_contents('recovery/install/src/Service/ConfigWriter.php', $newContent);
+}
+
 // database might not exist, so let's try creating it (just to be safe)
 $stderr = fopen('php://stderr', 'w');
 $host = $argv[1];
