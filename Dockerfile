@@ -11,13 +11,13 @@ ENV SHOPWARE_DB_HOST=mysql \
 
 RUN \
 apt-get update &&\
-apt-get install -y unzip curl &&\
+apt-get install -y unzip curl php7.1-apcu &&\
 rm -rf /var/lib/apt/lists/* &&\
 { \
     echo 'zend_extension = "/usr/lib/php/20160303/opcache.so"'; \
     echo 'opcache.memory_consumption=128'; \
     echo 'opcache.interned_strings_buffer=8'; \
-    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.max_accelerated_files=8000'; \
     echo 'opcache.revalidate_freq=60'; \
     echo 'opcache.fast_shutdown=1'; \
     echo 'opcache.enable_cli=1'; \
@@ -26,6 +26,12 @@ rm -rf /var/lib/apt/lists/* &&\
 { \
     echo 'zend_extension = "/usr/lib/php/20160303/ioncube_loader_lin_7.1.so"'; \
   } > /etc/php/7.1/apache2/conf.d/10-ioncube.ini && \
+{ \
+    echo 'zend_extension = "/usr/lib/php/20160303/apc.so"'; \
+    echo 'apc.shm_size=64M'; /
+    echo 'apc.num_files_hint=8000'; /
+    echo 'apc.ttl=3600'; /
+  } > /etc/php/7.1/apache2/conf.d/10-apcu.ini && \
 
 SHOPWARE_DOWNLOAD=$(curl -fsL http://en.community.shopware.com/_cat_725.html/ | grep -Eo 'http://releases.s3.shopware.com.s3.amazonaws.com/install_5.4.[0-9\.]+_[a-f0-9]+.zip' | sed 's/\.zip//' | sort -nr | uniq | head -1) && \
 curl -fsL $SHOPWARE_DOWNLOAD.zip -o /usr/src/shopware.zip && \
