@@ -14,6 +14,7 @@ apt-get update &&\
 apt-get install -y unzip curl &&\
 rm -rf /var/lib/apt/lists/* &&\
 { \
+    echo 'zend_extension = "/usr/lib/php/20160303/opcache.so'; \
     echo 'opcache.memory_consumption=128'; \
     echo 'opcache.interned_strings_buffer=8'; \
     echo 'opcache.max_accelerated_files=4000'; \
