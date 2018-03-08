@@ -28,9 +28,9 @@ rm -rf /var/lib/apt/lists/* &&\
   } > /etc/php/7.1/apache2/conf.d/10-ioncube.ini && \
 { \
     echo 'zend_extension = "/usr/lib/php/20160303/apc.so"'; \
-    echo 'apc.shm_size=64M'; /
-    echo 'apc.num_files_hint=8000'; /
-    echo 'apc.ttl=3600'; /
+    echo 'apc.shm_size=64M'; \
+    echo 'apc.num_files_hint=8000'; \
+    echo 'apc.ttl=3600'; \
   } > /etc/php/7.1/apache2/conf.d/10-apcu.ini && \
 
 SHOPWARE_DOWNLOAD=$(curl -fsL http://en.community.shopware.com/_cat_725.html/ | grep -Eo 'http://releases.s3.shopware.com.s3.amazonaws.com/install_5.4.[0-9\.]+_[a-f0-9]+.zip' | sed 's/\.zip//' | sort -nr | uniq | head -1) && \
