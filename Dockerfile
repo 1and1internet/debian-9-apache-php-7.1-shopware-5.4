@@ -23,7 +23,7 @@ rm -rf /var/lib/apt/lists/* &&\
     echo 'opcache.enable=1'; \
   } > /etc/php/7.1/apache2/conf.d/10-opcache.ini && \
 { \
-    echo 'zend_extension = "/usr/lib/php/20151012/ioncube_loader_lin_7.1.so"'; \
+    echo 'zend_extension = "/usr/lib/php/20160303/ioncube_loader_lin_7.1.so"'; \
   } > /etc/php/7.1/apache2/conf.d/10-ioncube.ini && \
 
 SHOPWARE_DOWNLOAD=$(curl -fsL http://en.community.shopware.com/_cat_725.html/ | grep -Eo 'http://releases.s3.shopware.com.s3.amazonaws.com/install_5.4.[0-9\.]+_[a-f0-9]+.zip' | sed 's/\.zip//' | sort -nr | uniq | head -1) && \
