@@ -41,11 +41,13 @@ fi
 if ! [ -e shopware.php ]; then
   echo >&2 "Shopware not found in $(pwd) - copying now..."
   rm index.html
+  rm phpinfo.php
   if [ "$(ls -A)" ]; then
     echo >&2 "WARNING: $(pwd) is not empty - press Ctrl+C now if this is an error!"
     ( set -x; ls -A; sleep 10 )
   fi
   unzip /usr/src/shopware.zip -d .
+  chown -R 
   echo >&2 "Complete! Shopware has been successfully copied to $(pwd)"
 fi
 

@@ -24,9 +24,6 @@ rm -rf /var/lib/apt/lists/* &&\
     echo 'opcache.enable=1'; \
   } > /etc/php/7.1/apache2/conf.d/10-opcache.ini && \
 { \
-    echo 'zend_extension = "/usr/lib/php/20160303/ioncube_loader_lin_7.1.so"'; \
-  } > /etc/php/7.1/apache2/conf.d/10-ioncube.ini && \
-{ \
     echo 'zend_extension = "/usr/lib/php/20160303/apc.so"'; \
     echo 'apc.shm_size=64M'; \
     echo 'apc.num_files_hint=8000'; \
