@@ -47,7 +47,6 @@ if ! [ -e shopware.php ]; then
     ( set -x; ls -A; sleep 10 )
   fi
   unzip /usr/src/shopware.zip -d .
-  chown -R 
   echo >&2 "Complete! Shopware has been successfully copied to $(pwd)"
 fi
 
